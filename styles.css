@@ -4,3 +4,31 @@
 @media(max-width:900px){.nav{display:none}.topbar{grid-template-columns:1fr auto}.hero-media{left:18%}.hero-vignette{background:linear-gradient(90deg,#080808 0%,rgba(8,8,8,.83) 45%,rgba(8,8,8,.12)),linear-gradient(0deg,#080808 0%,transparent 38%)}.hero-copy{width:82vw;top:54%}.hero h1{font-size:clamp(60px,14vw,120px)}.hero-desc{max-width:70vw}.hero-caption,.hero-ghost{display:none}.statement-grid,.section-head,.about{grid-template-columns:1fr}.section-head{gap:25px}.selected-grid{grid-auto-rows:60px}.work-card,.work-card.wide{grid-column:span 6}.motion{grid-template-columns:1fr}.archive-head{display:block}.filters{justify-content:flex-start;margin-top:25px}.archive-grid{columns:3 180px}.about{gap:20px}.collection-panel{grid-template-columns:60px 1fr}.collection-content small{display:none}footer{grid-template-columns:1fr auto}footer p{display:none}}
 @media(max-width:600px){:root{--pad:20px}.topbar{height:62px}.brand{font-size:12px}.hero{min-height:670px}.hero-media{left:0;opacity:.72}.hero-vignette{background:linear-gradient(0deg,#080808 0%,rgba(8,8,8,.52) 48%,rgba(8,8,8,.2)),linear-gradient(90deg,rgba(8,8,8,.78),transparent)}.hero-copy{width:calc(100vw - 40px);top:58%}.hero h1{font-size:16vw;line-height:.82}.hero h1 em{padding-left:0;margin-top:.22em}.hero-desc{max-width:92vw;font-size:13px;margin:28px 0 24px}.scroll-mark{bottom:17px}.statement-grid h2{font-size:11vw}.section-pad{padding-top:95px;padding-bottom:95px}.section-head{margin-bottom:40px}.selected-grid{display:block}.work-card,.work-card.wide,.work-card.tall,.work-card.standard{display:block;width:100%;height:72vh;max-height:650px;margin-bottom:10px}.archive-grid{columns:2 135px}.archive-card>span{opacity:1;padding-top:40px}.collection-panel{height:130px}.collection-content strong{font-size:31px}.motion{padding-top:85px;padding-bottom:85px}.about-stats strong{font-size:45px}footer{padding:28px 20px}.ticker{height:40px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-media img,.ticker div,.scroll-mark i:after{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+
+
+/* ===== OLEK / VISUALS — artwork-preserving display fix ===== */
+/* Selected work: preserve the complete vertical artwork instead of cropping it. */
+.work-card{background:#090909;isolation:isolate}
+.work-card::before{content:"";position:absolute;inset:-8%;z-index:0;background-image:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.46)),var(--art);background-size:cover;background-position:center;filter:blur(22px) saturate(.85);transform:scale(1.08);opacity:.78;pointer-events:none}
+.work-card img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;object-position:center;background:rgba(8,8,8,.12);transition:transform .9s cubic-bezier(.2,.7,.1,1),filter .6s}
+.work-card:hover img{transform:scale(1.018);filter:brightness(.91)}
+.work-card .card-shade{z-index:2;background:linear-gradient(0deg,rgba(0,0,0,.82),rgba(0,0,0,.03) 42%,transparent 65%)}
+.work-card .work-meta{z-index:3}
+
+/* Motion: the source film is vertical 9:16 — show the complete frame. */
+.motion{grid-template-columns:minmax(0,1fr) minmax(300px,460px);gap:clamp(45px,7vw,110px)}
+.video-shell{aspect-ratio:9/16;width:min(100%,430px);max-height:78vh;justify-self:center;background:#0a0a0a;box-shadow:0 28px 70px rgba(0,0,0,.22)}
+.video-shell video{width:100%;height:100%;object-fit:contain;object-position:center;background:#0a0a0a}
+
+@media(max-width:900px){
+  .motion{grid-template-columns:1fr}
+  .video-shell{width:min(72vw,430px);max-height:none}
+}
+@media(max-width:600px){
+  .work-card,.work-card.wide,.work-card.tall,.work-card.standard{height:76vh;max-height:720px;min-height:520px}
+  .video-shell{width:min(86vw,410px)}
+}
+
+/* Hero: preserve the full Chopin artwork while retaining a cinematic full-screen field. */
+.hero-media{background-image:linear-gradient(rgba(5,5,5,.20),rgba(5,5,5,.34)),url('assets/images/chopin.webp');background-size:cover;background-position:center 20%}
+.hero-media img{position:relative;z-index:1;object-fit:contain;object-position:center center;filter:drop-shadow(0 0 30px rgba(0,0,0,.25))}
