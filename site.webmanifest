@@ -1,0 +1,11 @@
+{
+  "name": "OLEK / VISUALS",
+  "short_name": "OLEK VISUALS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": [
+    {"src": "/assets/brand/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"}
+  ]
+}
