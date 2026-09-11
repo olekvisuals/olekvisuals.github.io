@@ -12,5 +12,6 @@ document.querySelectorAll('[data-filter-jump]').forEach(b=>b.addEventListener('c
 const lb=document.getElementById('lightbox'),lbi=lb.querySelector('img'),lbt=lb.querySelector('b');let lastFocus=null;
 function openLightbox(btn){lastFocus=btn;lbi.src=btn.dataset.open;lbi.alt=btn.dataset.title;lbt.textContent=btn.dataset.title;lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';lb.querySelector('.lightbox-close').focus();}
 function closeLightbox(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';lbi.src='';if(lastFocus)lastFocus.focus();}
+document.querySelectorAll('video').forEach(v=>v.addEventListener('play',()=>{document.querySelectorAll('video').forEach(other=>{if(other!==v&&!other.paused)other.pause();});}));
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openLightbox(b)));lb.querySelector('.lightbox-close').addEventListener('click',closeLightbox);lb.addEventListener('click',e=>{if(e.target===lb)closeLightbox()});addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLightbox()});
 })();
